@@ -31,4 +31,21 @@
  * @subpackage    cake.app
  */
 class AppModel extends Model {
+
+  var $actsAs = array('Containable');
+
+  /**
+   * Removes the DESCRIBE stuff from the SQL log
+   */
+
+  function schema($field = false)
+  {
+    $db =& ConnectionManager::getDataSource($this->useDbConfig);
+    $fullDebug = $db->fullDebug;
+    $db->fullDebug = false;
+    $return = parent::schema($field);
+    $db->fullDebug = $fullDebug;
+    return $return;
+  }
+
 }
