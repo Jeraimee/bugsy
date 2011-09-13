@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bugsy</title>
+    <title>Bugsy | <?php echo (!empty($this->pageTitle) ? $this->pageTitle :$title_for_layout)?></title>
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <?php echo $this->Html->css('bootstrap-1.2.0.min.css');?>
-
-    <?php echo $this->Html->meta('icon')?>
+    <?php echo $this->Html->css('bootstrap-1.2.0.min.css');
+    echo $scripts_for_layout;
+    echo $this->Html->meta('icon')?>
   </head>
 
   <body style="padding-top: 40px;">
@@ -16,9 +16,10 @@
     <div class="topbar">
       <div class="topbar-inner">
         <div class="container">
+
           <h3><?php echo $this->Html->link('Bugsy', '/', array('title' => 'Simple Bug Tracking'))?></h3>
           <ul class="nav">
-            <li class="active"><a href="">New Issue</a></li>
+            <li><?php echo $this->Html->link('New Issue', array('controller' => 'bugs', 'action' => 'add'))?></li>
             <li><a href="#about">About</a></li>
             <li><a href="#grid-system">Grid</a></li>
             <li><a href="#layouts">Layouts</a></li>
@@ -39,21 +40,7 @@
 
     <div class="container">
 
-      <div class="row">
-
-        <div class="span5 columns">
-          <p>...</p>
-        </div>
-
-        <div class="span5 columns">
-          <p>...</p>
-        </div>
-
-        <div class="span5 columns">
-          <p>...</p>
-        </div>
-
-      </div>
+      <?php echo $content_for_layout;?>
 
       <footer>
          <p>
@@ -61,7 +48,7 @@
          </p>
       </footer>
 
-    </div> <!-- /container -->
+    </div>
 
   </body>
 </html>
