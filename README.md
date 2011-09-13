@@ -12,6 +12,7 @@ Requirements
 
 * [PHP][php] version 5.3 or higher
 * [MySQL][mysql] version 5.5 or higher
+* [CakePHP][cakephp] version 1.3
 
 License
 =======
