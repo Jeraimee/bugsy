@@ -1,0 +1,14 @@
+*~
+tmp/cache/*
+tmp/logs/*
+tmp/tests/*
+nbproject
+.DS_Store
+Thumbs.db
+Desktop.ini
+._*
+:2e_*
+.AppleDouble
+*.tmproj
+.project
+webrat.log
