@@ -1,58 +1,67 @@
-<?php
-/**
- *
- * PHP versions 4 and 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       cake
- * @subpackage    cake.cake.console.libs.templates.skel.views.layouts
- * @since         CakePHP(tm) v 0.10.0.1076
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- */
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <?php echo $this->Html->charset(); ?>
-  <title>
-    <?php __('CakePHP: the rapid development php framework:'); ?>
-    <?php echo $title_for_layout; ?>
-  </title>
-  <?php
-    echo $this->Html->meta('icon');
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bugsy</title>
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <?php echo $this->Html->css('bootstrap-1.2.0.min.css');?>
 
-    echo $this->Html->css('cake.generic');
+    <?php echo $this->Html->meta('icon')?>
+  </head>
 
-    echo $scripts_for_layout;
-  ?>
-</head>
-<body>
-  <div id="container">
-    <div id="header">
-      <h1><?php echo $this->Html->link(__('CakePHP: the rapid development php framework', true), 'http://cakephp.org'); ?></h1>
+  <body style="padding-top: 40px;">
+
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <h3><?php echo $this->Html->link('Bugsy', '/', array('title' => 'Simple Bug Tracking'))?></h3>
+          <ul class="nav">
+            <li class="active"><a href="">New Issue</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#grid-system">Grid</a></li>
+            <li><a href="#layouts">Layouts</a></li>
+            <li><a href="#typography">Typography</a></li>
+          </ul>
+
+          <form action="">
+            <input type="text" placeholder="Search..." />
+          </form>
+
+          <ul class="nav secondary-nav">
+            <li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login'))?></li>
+          </ul>
+
+        </div>
+      </div>
     </div>
-    <div id="content">
 
-      <?php echo $this->Session->flash(); ?>
+    <div class="container">
 
-      <?php echo $content_for_layout; ?>
+      <div class="row">
 
-    </div>
-    <div id="footer">
-      <?php echo $this->Html->link(
-          $this->Html->image('cake.power.gif', array('alt'=> __('CakePHP: the rapid development php framework', true), 'border' => '0')),
-          'http://www.cakephp.org/',
-          array('target' => '_blank', 'escape' => false)
-        );
-      ?>
-    </div>
-  </div>
-</body>
+        <div class="span5 columns">
+          <p>...</p>
+        </div>
+
+        <div class="span5 columns">
+          <p>...</p>
+        </div>
+
+        <div class="span5 columns">
+          <p>...</p>
+        </div>
+
+      </div>
+
+      <footer>
+         <p>
+           <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a> Bugsy is &copy; Jeraimee Hughes
+         </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+  </body>
 </html>
