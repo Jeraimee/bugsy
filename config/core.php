@@ -243,6 +243,9 @@
   Configure::write('Acl.classname', 'DbAcl');
   Configure::write('Acl.database', 'default');
 
+  Configure::write('Defaults.statuses', array('New', 'Assigned', 'Resolved'));
+  Configure::write('Defaults.priorities', array('P1', 'P2', 'P3'));
+
 /**
  * If you are on PHP 5.3 uncomment this line and correct your server timezone
  * to fix the date & time related errors.
