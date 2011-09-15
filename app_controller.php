@@ -41,8 +41,8 @@ class AppController extends Controller {
 
   function beforeRender()
   {
-    $user = $this->Auth->user();
-    $this->set(compact('user'));
+    $this->user = $this->Auth->user();
+    $this->set('user', $this->user);
   }
 
 
