@@ -39,4 +39,22 @@ class AppController extends Controller {
 
   var $helpers = array('Form', 'Html', 'Js', 'Session', 'Time', 'Ajax');
 
+  function beforeRender()
+  {
+    $user = $this->Auth->user();
+    $this->set(compact('user'));
+  }
+
+
+  function setError($message)
+  {
+    return $this->Session->setFlash($message, 'error');
+  }
+
+
+  function setSuccess($message)
+  {
+    return $this->Session->setFlash($message, 'success');
+  }
+
 }

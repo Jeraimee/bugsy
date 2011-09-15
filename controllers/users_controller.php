@@ -3,6 +3,27 @@ class UsersController extends AppController {
 
   var $name = 'Users';
 
+  public function beforeFilter()
+  {
+    parent::beforeFilter();
+    $this->Auth->allow(array('add'));
+  }
+
+
+  public function login()
+  {
+    if ($this->Auth->user()) {
+      $this->redirect($this->referer());
+    }
+  }
+
+
+  public function logout()
+  {
+    $this->redirect($this->Auth->logout());
+  }
+
+
   function index()
   {
     $this->User->recursive = 0;
@@ -22,16 +43,28 @@ class UsersController extends AppController {
 
   function add()
   {
+    if ($this->Auth->user()) {
+      $this->redirect('/');
+    }
     if (!empty($this->data)) {
       $this->User->create();
-      if ($this->User->save($this->data)) {
-        $this->Session->setFlash(__('The user has been saved', true));
-        $this->redirect(array('action' => 'index'));
+
+      if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {
+        if ($this->User->save($this->data)) {
+          $this->setSuccess(__('Your account has been added. You may now login.', true));
+          $this->redirect(array('controller' => 'users', 'action' => 'login'));
+          return;
+        }
+        else {
+          $this->setError(__('The user could not be saved. Please, try again.', true));
+        }
       }
       else {
-        $this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
+        $this->setError(__('Your passwords did not match. Please, try again.', true));
       }
     }
+    unset($this->data['User']['password']);
+    unset($this->data['User']['password_confirm']);
   }
 
 

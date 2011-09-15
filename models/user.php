@@ -8,7 +8,9 @@ class User extends AppModel {
 
   var $validate = array('username' => array('notempty' => array('rule'     => array('notempty'),
                                                                 'message'  => 'Username is a required field',
-                                                                'required' => true)),
+                                                                'required' => true),
+                                            'unique' => array('rule'    => array('isUnique'),
+                                                              'message' => 'This username is already in use.')),
                         'password' => array('notempty' => array('rule'     => array('notempty'),
                                                                 'message'  => 'Password is a required field',
                                                                 'required' => true)),

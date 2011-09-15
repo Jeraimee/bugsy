@@ -6,7 +6,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <?php echo $this->Html->css('bootstrap-1.2.0.min.css');
+    <?php echo $this->Html->css(array('bootstrap-1.2.0.min.css', 'bugsy.css'));
     echo $scripts_for_layout;
     echo $this->Html->meta('icon')?>
   </head>
@@ -19,7 +19,7 @@
 
           <h3><?php echo $this->Html->link('Bugsy', '/', array('title' => 'Simple Bug Tracking'))?></h3>
           <ul class="nav">
-            <li><?php echo $this->Html->link('New Issue', array('controller' => 'bugs', 'action' => 'add'))?></li>
+            <li><?php echo $this->Html->link('Add Bug', array('controller' => 'bugs', 'action' => 'add'))?></li>
             <li><a href="#about">About</a></li>
             <li><a href="#grid-system">Grid</a></li>
             <li><a href="#layouts">Layouts</a></li>
@@ -31,7 +31,13 @@
           </form>
 
           <ul class="nav secondary-nav">
+            <?php if (empty($user)):?>
+            <li><?php echo $this->Html->link('Create Account', array('controller' => 'users', 'action' => 'add'))?></li>
             <li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login'))?></li>
+            <?php else:?>
+            <li><?php echo $this->Html->link('Manage Account', array('controller' => 'users', 'action' => 'my'))?></li>
+            <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'))?></li>
+            <?php endif;?>
           </ul>
 
         </div>
@@ -40,6 +46,7 @@
 
     <div class="container">
 
+      <?php echo $this->Session->flash(); echo $this->Session->flash('auth');?>
       <?php echo $content_for_layout;?>
 
       <footer>
