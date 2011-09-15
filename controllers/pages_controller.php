@@ -84,7 +84,37 @@ class PagesController extends AppController {
     if (!empty($path[$count - 1])) {
       $title_for_layout = Inflector::humanize($path[$count - 1]);
     }
-    $this->set(compact('page', 'subpage', 'title_for_layout'));
+
+    if ($page == 'home') {
+
+      $this->Project = ClassRegistry::init('Project');
+      $params = array('order' => array('Project.modified DESC'));
+      if (empty($this->user)) {
+        $params['conditions'] = array('Project.public_view' => true);
+      }
+      $this->Project->contain();
+      $projects = $this->Project->find('all', $params);
+
+      $params = array('order' => array('Issue.modified DESC'));
+      if (empty($this->user)) {
+        $params['conditions'] = array('Project.public_view' => true);
+      }
+      $this->Project->Issue->contain(array('Project'));
+      $issues = $this->Project->Issue->find('all', $params);
+
+      $params = array('order' => array('Comment.created DESC'));
+      if (empty($this->user)) {
+        $params['conditions'] = array('Issue.project_id' => array());
+        foreach ($projects as $project) {
+          $params['conditions']['Issue.project_id'][] = $project['Project']['id'];
+        }
+      }
+      $this->Project->Issue->Comment->contain(array('Issue'));
+      $comments = $this->Project->Issue->Comment->find('all', $params);
+
+    }
+
+    $this->set(compact('page', 'subpage', 'title_for_layout', 'projects', 'issues', 'comments'));
     $this->render(implode('/', $path));
   }
 }
