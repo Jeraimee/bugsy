@@ -19,9 +19,9 @@
       <div class="topbar-inner">
         <div class="container">
 
-          <h3><?php echo $this->Html->link('Bugsy', '/', array('title' => 'Simple Bug Tracking'))?></h3>
+          <h3><?php echo $this->Html->link('Bugsy', '/', array('title' => 'Simple Issue Tracking'))?></h3>
           <ul class="nav">
-            <li><?php echo $this->Html->link('Add Bug', array('controller' => 'bugs', 'action' => 'add'))?></li>
+            <li><?php echo $this->Html->link('Add Issue', array('controller' => 'issues', 'action' => 'add'))?></li>
             <li><a href="#about">About</a></li>
             <li><a href="#grid-system">Grid</a></li>
             <li><a href="#layouts">Layouts</a></li>

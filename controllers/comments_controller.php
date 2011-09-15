@@ -15,9 +15,9 @@ class CommentsController extends AppController {
         $this->Session->setFlash(__('The comment could not be saved. Please, try again.', true));
       }
     }
-    $bugs = $this->Comment->Bug->find('list');
+    $issues = $this->Comment->Issue->find('list');
     $users = $this->Comment->User->find('list');
-    $this->set(compact('bugs', 'users'));
+    $this->set(compact('issues', 'users'));
   }
 
 
@@ -39,9 +39,9 @@ class CommentsController extends AppController {
     if (empty($this->data)) {
       $this->data = $this->Comment->read(null, $id);
     }
-    $bugs = $this->Comment->Bug->find('list');
+    $issues = $this->Comment->Issue->find('list');
     $users = $this->Comment->User->find('list');
-    $this->set(compact('bugs', 'users'));
+    $this->set(compact('issues', 'users'));
   }
 
 

@@ -3,7 +3,7 @@
   <div class="span4 columns">
     <h3>Creating Account</h3>
     <p>
-      Creating an account will allow you to add bugs to non-public projects as well as get email notifications from Bugsy.
+      Creating an account will allow you to add issues to non-public projects as well as get email notifications from Bugsy.
     </p>
     <p>
       Fields in <span style="color: red">red</span> are required.

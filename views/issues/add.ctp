@@ -1,7 +1,7 @@
-<?php $this->pageTitle = 'Add Bug'?>
+<?php $this->pageTitle = 'Add Issue'?>
 <div class="row">
   <div class="span4 columns">
-    <h3>Adding Bug</h3>
+    <h3>Adding An Issue</h3>
     <?php if (empty($user)):?>
     <p class="alert-message block-message info">
       You are not logged in. You may only add issues to publicly accessible projects.
@@ -27,7 +27,7 @@
   </div>
   <div class="span12 columns">
 
-  <?php echo $this->Form->create('Bug', array('class' => 'form-stacked'));?>
+  <?php echo $this->Form->create('Issue', array('class' => 'form-stacked'));?>
   <fieldset>
   <?php
     echo $this->Form->input('project_id', array('div' => array('class' => 'clearfix')));
@@ -38,7 +38,7 @@
   ?>
   </fieldset>
   <div class="actions">
-    <?php echo $this->Form->button(__('Add Bug', true), array('class' => 'btn primary'))?>
+    <?php echo $this->Form->button(__('Add Issue', true), array('class' => 'btn primary'))?>
   </div>
   <?php echo $this->Form->end();?>
   </div>

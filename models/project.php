@@ -15,16 +15,16 @@ class Project extends AppModel {
                                                                  'message'  => 'Invalid value for public_add',
                                                                  'required' => true)));
 
-  var $hasMany = array('Bug' => array('className'    => 'Bug',
-                                      'foreignKey'   => 'project_id',
-                                      'dependent'    => false,
-                                      'conditions'   => '',
-                                      'fields'       => '',
-                                      'order'        => '',
-                                      'limit'        => '',
-                                      'offset'       => '',
-                                      'exclusive'    => '',
-                                      'finderQuery'  => '',
-                                      'counterQuery' => ''));
+  var $hasMany = array('Issue' => array('className'    => 'Issue',
+                                        'foreignKey'   => 'project_id',
+                                        'dependent'    => false,
+                                        'conditions'   => '',
+                                        'fields'       => '',
+                                        'order'        => '',
+                                        'limit'        => '',
+                                        'offset'       => '',
+                                        'exclusive'    => '',
+                                        'finderQuery'  => '',
+                                        'counterQuery' => ''));
 
 }

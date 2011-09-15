@@ -1,7 +1,7 @@
 <?php
-class Bug extends AppModel {
+class Issue extends AppModel {
 
-  var $name = 'Bug';
+  var $name = 'Issue';
 
   var $displayField = 'name';
 
@@ -41,7 +41,7 @@ class Bug extends AppModel {
                                          'order'      => ''));
 
   var $hasMany = array('Comment' => array('className'    => 'Comment',
-                                          'foreignKey'   => 'bug_id',
+                                          'foreignKey'   => 'issue_id',
                                           'dependent'    => false,
                                           'conditions'   => '',
                                           'fields'       => '',
