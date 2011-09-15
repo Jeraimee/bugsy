@@ -22,7 +22,7 @@ class ProjectsController extends AppController {
   function view($id = null)
   {
     if (!$id) {
-      $this->Session->setFlash(__('Invalid project', true));
+      $this->setError(__('Invalid project', true));
       $this->redirect(array('action' => 'index'));
     }
     $this->set('project', $this->Project->read(null, $id));
@@ -34,11 +34,11 @@ class ProjectsController extends AppController {
     if (!empty($this->data)) {
       $this->Project->create();
       if ($this->Project->save($this->data)) {
-        $this->Session->setFlash(__('The project has been saved', true));
-        $this->redirect(array('action' => 'index'));
+        $this->setSuccess(__('The project has been saved', true));
+        $this->redirect(array('action' => 'view', $this->Project->getLastInsertID()));
       }
       else {
-        $this->Session->setFlash(__('The project could not be saved. Please, try again.', true));
+        $this->setError(__('The project could not be saved. Please, try again.', true));
       }
     }
   }
@@ -47,16 +47,16 @@ class ProjectsController extends AppController {
   function edit($id = null)
   {
     if (!$id && empty($this->data)) {
-      $this->Session->setFlash(__('Invalid project', true));
+      $this->setError(__('Invalid project', true));
       $this->redirect(array('action' => 'index'));
     }
     if (!empty($this->data)) {
       if ($this->Project->save($this->data)) {
-        $this->Session->setFlash(__('The project has been saved', true));
-        $this->redirect(array('action' => 'index'));
+        $this->setSuccess(__('The project has been saved', true));
+        $this->redirect(array('action' => 'view', $this->data['Project']['id']));
       }
       else {
-        $this->Session->setFlash(__('The project could not be saved. Please, try again.', true));
+        $this->setError(__('The project could not be saved. Please, try again.', true));
       }
     }
     if (empty($this->data)) {

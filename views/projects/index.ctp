@@ -47,9 +47,9 @@
           </td>
           <td>
             <?php if (!empty($user)):?>
-            <button class="btn primary" onclick="window.location.href='/admin/projects/edit/<?php echo $project['Project']['id']?>';">Edit</button>
+            <button class="btn primary" onclick="window.location.href='/projects/edit/<?php echo $project['Project']['id']?>';">Edit</button>
             <?php endif;?>
-            <button class="btn primary" onclick="window.location.href='/admin/projects/view/<?php echo $project['Project']['id']?>';">View</button>
+            <button class="btn primary" onclick="window.location.href='/projects/view/<?php echo $project['Project']['id']?>';">View</button>
           </td>
         </tr>
         <?php endforeach;?>

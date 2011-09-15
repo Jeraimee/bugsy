@@ -1,103 +1,91 @@
-<div class="projects view">
-<h2><?php  __('Project');?></h2>
-	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['id']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['created']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['modified']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Name'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['name']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Description'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['description']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Public View'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['public_view']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Public Add'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $project['Project']['public_add']; ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Project', true), array('action' => 'edit', $project['Project']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('Delete Project', true), array('action' => 'delete', $project['Project']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $project['Project']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Projects', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Project', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Bugs', true), array('controller' => 'bugs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Bug', true), array('controller' => 'bugs', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php __('Related Bugs');?></h3>
-	<?php if (!empty($project['Bug'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('Id'); ?></th>
-		<th><?php __('Created'); ?></th>
-		<th><?php __('Modified'); ?></th>
-		<th><?php __('Project Id'); ?></th>
-		<th><?php __('User Id'); ?></th>
-		<th><?php __('Name'); ?></th>
-		<th><?php __('Description'); ?></th>
-		<th><?php __('Url'); ?></th>
-		<th><?php __('Status'); ?></th>
-		<th><?php __('Priority'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($project['Bug'] as $bug):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $bug['id'];?></td>
-			<td><?php echo $bug['created'];?></td>
-			<td><?php echo $bug['modified'];?></td>
-			<td><?php echo $bug['project_id'];?></td>
-			<td><?php echo $bug['user_id'];?></td>
-			<td><?php echo $bug['name'];?></td>
-			<td><?php echo $bug['description'];?></td>
-			<td><?php echo $bug['url'];?></td>
-			<td><?php echo $bug['status'];?></td>
-			<td><?php echo $bug['priority'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'bugs', 'action' => 'view', $bug['id'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'bugs', 'action' => 'edit', $bug['id'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'bugs', 'action' => 'delete', $bug['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $bug['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
+<?php $this->pageTitle = $project['Project']['name']?>
+<div class="row">
+  <div class="span4 columns">
+    <h3>Project Actions</h3>
+    <?php if (empty($user)):?>
+    <p class="alert-message block-message info">
+      You are not logged in. You may only add issues to projects that allow public issue adding.
+    </p>
+    <?php endif;?>
+    <ul>
+      <?php if (!empty($user)):?>
+      <li><?php echo $this->Html->link('Edit Project', array('action' => 'edit', $project['Project']['id']))?></li>
+      <?php endif;?>
+      <?php if (!empty($user) or ($project['Project']['public_add'] == 1)):?>
+      <li><?php echo $this->Html->link('Add Issue', array('controller' => 'issues', 'action' => 'add', $project['Project']['id'], 'admin' => false))?></li>
+      <?php endif;?>
+    </ul>
+  </div>
+  <div class="span12 columns">
+    <p>
+      <dl>
+        <dt>Project Name</dt>
+        <dd><?php echo $project['Project']['name']?></dd>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Bug', true), array('controller' => 'bugs', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
+        <dt>Project Description</dt>
+        <dd><?php echo $project['Project']['description']?></dd>
+
+        <dt>Project Created</dt>
+        <dd><?php echo $this->Time->nice($project['Project']['created'])?></dd>
+
+        <dt>Project Last Modified</dt>
+        <dd><?php echo $this->Time->nice($project['Project']['modified'])?></dd>
+
+        <dt>Publicly Viewable?</dt>
+        <dd><?php echo ($project['Project']['public_view']) ? 'Yes' : 'No';?></dd>
+
+        <dt>Public Issue Adding?</dt>
+        <dd><?php echo ($project['Project']['public_add']) ? 'Yes' : 'No';?></dd>
+      </dl>
+    </p>
+
+    <h3>Issues</h3>
+
+    <table class="zebra-striped">
+      <thead>
+        <tr>
+          <th>
+            ID
+          </th>
+          <th>
+            Subject
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Priority
+          </th>
+          <th>
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($project['Issue'] as $issue):?>
+        <tr>
+          <td>
+            <?php echo $issue['id']?>
+          </td>
+          <td>
+            <?php echo $this->Text->truncate($issue['subject'], 50)?>
+          </td>
+          <td>
+            <?php echo $issue['status']?>
+          </td>
+          <td>
+            <?php echo $issue['priority']?>
+          </td>
+          <td>
+            <?php if (!empty($user)):?>
+            <button class="btn primary" onclick="window.location.href='/issues/edit/<?php echo $issue['id']?>';">Edit</button>
+            <?php endif;?>
+            <button class="btn primary" onclick="window.location.href='/issues/view/<?php echo $issue['id']?>';">View</button>
+          </td>
+        </tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+
+  </div>
 </div>

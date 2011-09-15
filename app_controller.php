@@ -39,7 +39,7 @@ class AppController extends Controller {
 
   var $helpers = array('Form', 'Html', 'Js', 'Session', 'Time', 'Text', 'Ajax');
 
-  function beforeRender()
+  public function beforeFilter()
   {
     $this->user = $this->Auth->user();
     $this->set('user', $this->user);
