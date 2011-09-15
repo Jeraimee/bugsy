@@ -15,7 +15,6 @@
   <fieldset>
   <?php
     echo $this->Form->input('project_id', array('div' => array('class' => 'clearfix')));
-    echo $this->Form->input('user_id', array('div' => array('class' => 'clearfix')));
     echo $this->Form->input('subject', array('div' => array('class' => 'clearfix')));
     echo $this->Form->input('description', array('div' => array('class' => 'clearfix')));
     echo $this->Form->input('url', array('label' => 'URL', 'div' => array('class' => 'clearfix')));

@@ -31,6 +31,9 @@ class BugsController extends AppController {
     if (!empty($this->data)) {
 
       $this->data['Bug']['status'] = 'New';
+      if (!empty($this->user)) {
+        $this->data['Bug']['user_id'] = $this->user['id'];
+      }
 
       $this->Bug->create();
       if ($this->Bug->save($this->data)) {
