@@ -29,11 +29,12 @@ class Issue extends AppModel {
                                                                 'message'  => 'Priority is a required field',
                                                                 'required' => true)));
 
-  var $belongsTo = array('Project' => array('className'  => 'Project',
-                                            'foreignKey' => 'project_id',
-                                            'conditions' => '',
-                                            'fields'     => '',
-                                            'order'      => ''),
+  var $belongsTo = array('Project' => array('className'    => 'Project',
+                                            'foreignKey'   => 'project_id',
+                                            'conditions'   => '',
+                                            'fields'       => '',
+                                            'order'        => '',
+                                            'counterCache' => true),
                          'User' => array('className'  => 'User',
                                          'foreignKey' => 'user_id',
                                          'conditions' => '',

@@ -45,7 +45,17 @@ class IssuesController extends AppController {
       }
     }
 
-    $projects = $this->Issue->Project->find('list');
+    $params = array();
+    if (empty($this->user)) {
+      $params['conditions'] = array('Project.public_add' => true);
+    }
+    $projects = $this->Issue->Project->find('list', $params);
+
+    if (empty($projects)) {
+      $this->setError(__('No projects are currently available.', true));
+      $this->redirect('/');
+    }
+
     $users = $this->Issue->User->find('list');
     $priorities = Configure::read('Defaults.priorities');
 

@@ -17,7 +17,7 @@ class Project extends AppModel {
 
   var $hasMany = array('Issue' => array('className'    => 'Issue',
                                         'foreignKey'   => 'project_id',
-                                        'dependent'    => false,
+                                        'dependent'    => true,
                                         'conditions'   => '',
                                         'fields'       => '',
                                         'order'        => '',

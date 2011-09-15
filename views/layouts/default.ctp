@@ -37,6 +37,16 @@
             <li><?php echo $this->Html->link('Create Account', array('controller' => 'users', 'action' => 'add'))?></li>
             <li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login'))?></li>
             <?php else:?>
+              <?php if ($user['User']['id'] == 1):?>
+              <li class="dropdown">
+                <?php echo $this->Html->link('Admin', '#', array('class' => 'dropdown-toggle'))?>
+                <ul class="dropdown-menu">
+                  <li><?php echo $this->Html->link('Issues', array('controller' => 'issues', 'action' => 'index', 'admin' => true))?></li>
+                  <li><?php echo $this->Html->link('Projects', array('controller' => 'projects', 'action' => 'index', 'admin' => true))?></li>
+                  <li><?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index', 'admin' => true))?></li>
+                </ul>
+              </li>
+              <?php endif;?>
             <li><?php echo $this->Html->link('Manage Account', array('controller' => 'users', 'action' => 'my'))?></li>
             <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'))?></li>
             <?php endif;?>

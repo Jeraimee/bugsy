@@ -78,11 +78,11 @@ class ProjectsController extends AppController {
     if (!empty($this->data)) {
       $this->Project->create();
       if ($this->Project->save($this->data)) {
-        $this->Session->setFlash(__('The project has been saved', true));
+        $this->setSuccess(__('The project has been saved', true));
         $this->redirect(array('action' => 'index'));
       }
       else {
-        $this->Session->setFlash(__('The project could not be saved. Please, try again.', true));
+        $this->setError(__('The project could not be saved. Please, try again.', true));
       }
     }
   }
@@ -91,16 +91,16 @@ class ProjectsController extends AppController {
   function admin_edit($id = null)
   {
     if (!$id && empty($this->data)) {
-      $this->Session->setFlash(__('Invalid project', true));
+      $this->setSuccess(__('Invalid project', true));
       $this->redirect(array('action' => 'index'));
     }
     if (!empty($this->data)) {
       if ($this->Project->save($this->data)) {
-        $this->Session->setFlash(__('The project has been saved', true));
+        $this->setSuccess(__('The project has been saved', true));
         $this->redirect(array('action' => 'index'));
       }
       else {
-        $this->Session->setFlash(__('The project could not be saved. Please, try again.', true));
+        $this->setError(__('The project could not be saved. Please, try again.', true));
       }
     }
     if (empty($this->data)) {

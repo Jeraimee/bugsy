@@ -1,22 +1,45 @@
-<div class="projects form">
-<?php echo $this->Form->create('Project');?>
-	<fieldset>
-		<legend><?php __('Admin Add Project'); ?></legend>
-	<?php
-		echo $this->Form->input('name');
-		echo $this->Form->input('description');
-		echo $this->Form->input('public_view');
-		echo $this->Form->input('public_add');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
+<?php $this->pageTitle = 'Add Project'?>
+<div class="row">
+  <div class="span4 columns">
+    <h3>Adding Project</h3>
+    <p>
+      <dl>
+        <dt>Public View</dt>
+        <dd>Project will be viewable by users not logged into Bugsy</dd>
+        <dt>Public Add</dt>
+        <dd>Project issues can be created by users not logged into Bugsy</dd>
+      </dl>
+    </p>
+  </div>
+  <div class="span12 columns">
 
-		<li><?php echo $this->Html->link(__('List Projects', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Bugs', true), array('controller' => 'bugs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Bug', true), array('controller' => 'bugs', 'action' => 'add')); ?> </li>
-	</ul>
+    <?php echo $this->Form->create('Project', array('class' => 'form-stacked'));?>
+    <fieldset>
+      <?php
+        echo $this->Form->input('name', array('div' => array('class' => 'clearfix')));
+        echo $this->Form->input('description', array('div' => array('class' => 'clearfix')));
+        echo $this->Form->input('public_view', array('div' => array('class' => 'clearfix')));
+        echo $this->Form->input('public_add', array('div' => array('class' => 'clearfix')));
+      ?>
+    </fieldset>
+    <div class="actions">
+      <?php echo $this->Form->button(__('Add Project', true), array('class' => 'btn primary'))?>
+    </div>
+    <?php echo $this->Form->end();?>
+
+  </div>
 </div>
+<script type="text/javascript">
+document.observe('dom:loaded', function() {
+  $('ProjectPublicAdd').observe('click', function(e) {
+    if (Event.element(e).checked == true) {
+      $('ProjectPublicView').checked = true;
+    }
+  });
+  $('ProjectPublicView').observe('click', function(e) {
+    if (Event.element(e).checked == false) {
+      $('ProjectPublicAdd').checked = false;
+    }
+  });
+});
+</script>
