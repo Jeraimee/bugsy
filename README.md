@@ -1,6 +1,6 @@
 Bugsy: Simple Bug Tracking
 ==========================
-Bugsy is a [CakePHP][cakephp] application for simple bug tracking. When [Bugzilla][bugzilla] or [Mantis][mantis] are too much.
+Bugsy is a [CakePHP][cakephp] application for simple issue (bug) tracking. When [Bugzilla][bugzilla] or [Mantis][mantis] are too much.
 
 Features
 --------
