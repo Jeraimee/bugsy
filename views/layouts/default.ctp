@@ -7,6 +7,8 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <?php echo $this->Html->css(array('bootstrap-1.2.0.min.css', 'bugsy.css'));
+    echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js');
+    echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js');
     echo $scripts_for_layout;
     echo $this->Html->meta('icon')?>
   </head>
@@ -56,6 +58,6 @@
       </footer>
 
     </div>
-
+    <?php echo $this->Html->script('global')?>
   </body>
 </html>
