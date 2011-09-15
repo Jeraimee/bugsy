@@ -3,8 +3,17 @@ class ProjectsController extends AppController {
 
   var $name = 'Projects';
 
+  public function beforeFilter()
+  {
+    parent::beforeFilter();
+    $this->Auth->allow(array('index', 'view'));
+  }
+
   function index()
   {
+    if (empty($this->user)) {
+      $this->paginate = array('conditions' => array('Project.public_view' => true));
+    }
     $this->Project->recursive = 0;
     $this->set('projects', $this->paginate());
   }
