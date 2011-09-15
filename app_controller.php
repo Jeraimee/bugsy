@@ -37,7 +37,7 @@ class AppController extends Controller {
                           'DebugKit.Toolbar' => array('panels' => array('history' => false,
                                                                         'log'     => false)));
 
-  var $helpers = array('Form', 'Html', 'Js', 'Session', 'Time', 'Ajax');
+  var $helpers = array('Form', 'Html', 'Js', 'Session', 'Time', 'Text', 'Ajax');
 
   function beforeRender()
   {

@@ -26,7 +26,7 @@ class IssuesController extends AppController {
   }
 
 
-  function add()
+  function add($project_id = null)
   {
     if (!empty($this->data)) {
 
@@ -38,7 +38,7 @@ class IssuesController extends AppController {
       $this->Issue->create();
       if ($this->Issue->save($this->data)) {
         $this->setSuccess(__('The Issue has been saved', true));
-        $this->redirect(array('view', $this->Issue->getLastInsertID()));
+        $this->redirect(array('action' => 'view', $this->Issue->getLastInsertID()));
       }
       else {
         $this->setError(__('The Issue could not be saved. Please, try again.', true));
@@ -59,7 +59,7 @@ class IssuesController extends AppController {
     $users = $this->Issue->User->find('list');
     $priorities = Configure::read('Defaults.priorities');
 
-    $this->set(compact('projects', 'users', 'priorities'));
+    $this->set(compact('projects', 'users', 'priorities', 'project_id'));
 
   }
 

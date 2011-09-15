@@ -54,23 +54,25 @@
       </thead>
       <tbody>
         <?php foreach ($project['Issue'] as $issue):?>
-        <td>
-          <?php echo $issue['Issue']['id']?>
-        </td>
-        <td>
-          <?php echo $this->Text->truncate($issue['Issue']['subject'], 50)?>
-        </td>
-        <td>
-          <?php echo $issue['Issue']['status']?>
-        </td>
-        <td>
-          <?php echo $issue['Issue']['priority']?>
-        </td>
-        <td>
-          <button class="btn primary" onclick="window.location.href='/admin/issues/edit/<?php echo $issue['Issue']['id']?>';">Edit</button>
-          <button class="btn primary" onclick="window.location.href='/admin/issues/view/<?php echo $issue['Issue']['id']?>';">View</button>
-          <button class="btn danger" onclick="goOnConfirm('/admin/issues/delete/<?php echo $issue['Issue']['id']?>', 'Are you sure you want to delete issue <?php echo $issue['Issue']['id']?>?');">Delete</button>
-        </td>
+        <tr>
+          <td>
+            <?php echo $issue['id']?>
+          </td>
+          <td>
+            <?php echo $this->Text->truncate($issue['subject'], 50)?>
+          </td>
+          <td>
+            <?php echo $issue['status']?>
+          </td>
+          <td>
+            <?php echo $issue['priority']?>
+          </td>
+          <td>
+            <button class="btn primary" onclick="window.location.href='/admin/issues/edit/<?php echo $issue['id']?>';">Edit</button>
+            <button class="btn primary" onclick="window.location.href='/issues/view/<?php echo $issue['id']?>';">View</button>
+            <button class="btn danger" onclick="goOnConfirm('/admin/issues/delete/<?php echo $issue['id']?>', 'Are you sure you want to delete issue <?php echo $issue['id']?>?');">Delete</button>
+          </td>
+        </tr>
         <?php endforeach;?>
       </tbody>
     </table>
