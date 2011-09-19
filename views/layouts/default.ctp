@@ -35,7 +35,7 @@
           <ul class="nav secondary-nav">
             <?php if (empty($user)):?>
             <li><?php echo $this->Html->link('Create Account', array('controller' => 'users', 'action' => 'add'))?></li>
-            <li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login'))?></li>
+            <li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login', 'admin' => false))?></li>
             <?php else:?>
               <?php if ($user['User']['id'] == 1):?>
               <li class="dropdown">
@@ -47,8 +47,8 @@
                 </ul>
               </li>
               <?php endif;?>
-            <li><?php echo $this->Html->link('Manage Account', array('controller' => 'users', 'action' => 'my'))?></li>
-            <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout'))?></li>
+            <li><?php echo $this->Html->link('Manage Account', array('controller' => 'users', 'action' => 'my', 'admin' => false))?></li>
+            <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false))?></li>
             <?php endif;?>
           </ul>
 

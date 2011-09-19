@@ -32,7 +32,7 @@
       <?php foreach ($comments as $comment):?>
       <tr>
         <td>
-          <?php echo $this->Html->link($this->Text->truncate($comment['Comment']['comment'], 25), array('controller' => 'issues', 'action' => 'view', $comment['Comment']['issue_id']))?>
+          <?php echo $this->Html->link($this->Text->truncate($comment['Comment']['comment'], 25), array('controller' => 'issues', 'action' => 'view', $comment['Comment']['issue_id'], "#comment-{$comment['Comment']['id']}"))?>
         </td>
       </tr>
       <?php endforeach;?>

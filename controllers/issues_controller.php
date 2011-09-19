@@ -22,7 +22,8 @@ class IssuesController extends AppController {
       $this->Session->setFlash(__('Invalid Issue', true));
       $this->redirect(array('action' => 'index'));
     }
-    $this->set('Issue', $this->Issue->read(null, $id));
+    $this->Issue->contain(array('Project', 'Comment' => array('User')));
+    $this->set('issue', $this->Issue->read(null, $id));
   }
 
 
@@ -32,7 +33,7 @@ class IssuesController extends AppController {
 
       $this->data['Issue']['status'] = 'New';
       if (!empty($this->user)) {
-        $this->data['Issue']['user_id'] = $this->user['id'];
+        $this->data['Issue']['user_id'] = $this->user['User']['id'];
       }
 
       $this->Issue->create();
@@ -85,6 +86,13 @@ class IssuesController extends AppController {
     $projects = $this->Issue->Project->find('list');
     $users = $this->Issue->User->find('list');
     $this->set(compact('projects', 'users'));
+  }
+
+
+  function admin_index()
+  {
+    $this->Issue->recursive = 0;
+    $this->set('issues', $this->paginate());
   }
 
 }

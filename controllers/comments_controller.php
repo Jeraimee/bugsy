@@ -7,17 +7,21 @@ class CommentsController extends AppController {
   {
     if (!empty($this->data)) {
       $this->Comment->create();
+
+      if (!empty($this->user)) {
+        $this->data['Comment']['user_id'] = $this->user['User']['id'];
+      }
+
       if ($this->Comment->save($this->data)) {
-        $this->Session->setFlash(__('The comment has been saved', true));
-        $this->redirect(array('action' => 'index'));
+        $this->setSuccess(__('The comment has been saved', true));
+        $this->redirect($this->referer());
       }
       else {
-        $this->Session->setFlash(__('The comment could not be saved. Please, try again.', true));
+        $this->setError(__('The comment could not be saved. Please, try again.', true));
+        return;
+        $this->redirect($this->referer());
       }
     }
-    $issues = $this->Comment->Issue->find('list');
-    $users = $this->Comment->User->find('list');
-    $this->set(compact('issues', 'users'));
   }
 
 

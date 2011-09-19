@@ -1,114 +1,77 @@
-<div class="issues view">
-<h2><?php  __('Issue');?></h2>
-  <dl><?php $i = 0; $class = ' class="altrow"';?>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Id'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['id']; ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Created'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['created']; ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Modified'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['modified']; ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Project'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $this->Html->link($Issue['Project']['name'], array('controller' => 'projects', 'action' => 'view', $Issue['Project']['id'])); ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('User'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $this->Html->link($Issue['User']['username'], array('controller' => 'users', 'action' => 'view', $Issue['User']['id'])); ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Name'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['name']; ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Description'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['description']; ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Url'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['url']; ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Status'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['status']; ?>
-      &nbsp;
-    </dd>
-    <dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Priority'); ?></dt>
-    <dd<?php if ($i++ % 2 == 0) echo $class;?>>
-      <?php echo $Issue['Issue']['priority']; ?>
-      &nbsp;
-    </dd>
-  </dl>
-</div>
-<div class="actions">
-  <h3><?php __('Actions'); ?></h3>
-  <ul>
-    <li><?php echo $this->Html->link(__('Edit Issue', true), array('action' => 'edit', $Issue['Issue']['id'])); ?> </li>
-    <li><?php echo $this->Html->link(__('Delete Issue', true), array('action' => 'delete', $Issue['Issue']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $Issue['Issue']['id'])); ?> </li>
-    <li><?php echo $this->Html->link(__('List Issues', true), array('action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Issue', true), array('action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Projects', true), array('controller' => 'projects', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Project', true), array('controller' => 'projects', 'action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
-    <li><?php echo $this->Html->link(__('List Comments', true), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-    <li><?php echo $this->Html->link(__('New Comment', true), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-  </ul>
-</div>
-<div class="related">
-  <h3><?php __('Related Comments');?></h3>
-  <?php if (!empty($Issue['Comment'])):?>
-  <table cellpadding = "0" cellspacing = "0">
-  <tr>
-    <th><?php __('Id'); ?></th>
-    <th><?php __('Created'); ?></th>
-    <th><?php __('Modified'); ?></th>
-    <th><?php __('Issue Id'); ?></th>
-    <th><?php __('User Id'); ?></th>
-    <th><?php __('Comment'); ?></th>
-    <th class="actions"><?php __('Actions');?></th>
-  </tr>
-  <?php
-    $i = 0;
-    foreach ($Issue['Comment'] as $comment):
-      $class = null;
-      if ($i++ % 2 == 0) {
-        $class = ' class="altrow"';
-      }
-    ?>
-    <tr<?php echo $class;?>>
-      <td><?php echo $comment['id'];?></td>
-      <td><?php echo $comment['created'];?></td>
-      <td><?php echo $comment['modified'];?></td>
-      <td><?php echo $comment['Issue_id'];?></td>
-      <td><?php echo $comment['user_id'];?></td>
-      <td><?php echo $comment['comment'];?></td>
-      <td class="actions">
-        <?php echo $this->Html->link(__('View', true), array('controller' => 'comments', 'action' => 'view', $comment['id'])); ?>
-        <?php echo $this->Html->link(__('Edit', true), array('controller' => 'comments', 'action' => 'edit', $comment['id'])); ?>
-        <?php echo $this->Html->link(__('Delete', true), array('controller' => 'comments', 'action' => 'delete', $comment['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $comment['id'])); ?>
-      </td>
-    </tr>
-  <?php endforeach; ?>
-  </table>
-<?php endif; ?>
-
-  <div class="actions">
+<?php $this->pageTitle = "Issue ID {$issue['Issue']['id']}"?>
+<div class="row">
+  <div class="span4 columns">
+    <h3>Issue Actions</h3>
+    <?php if (!empty($user)):?>
     <ul>
-      <li><?php echo $this->Html->link(__('New Comment', true), array('controller' => 'comments', 'action' => 'add'));?> </li>
+      <li><?php echo $this->Html->link('Add Comment', '#add_comment')?></li>
+      <li><?php echo $this->Html->link('Edit Issue', array('action' => 'edit', $issue['Issue']['id']))?></li>
     </ul>
+    <?php else:?>
+    <p class="alert-message block-message info">
+      You are not logged in. You will not be able to comment on or edit issues.
+    </p>
+    <?php endif;?>
+  </div>
+  <div class="span12 columns">
+    <p>
+      <dl>
+        <dt>ID</dt>
+        <dd><?php echo $issue['Issue']['id']?></dd>
+
+        <dt>Subject</dt>
+        <dd><?php echo $issue['Issue']['subject']?></dd>
+
+        <dt>Description</dt>
+        <dd><?php echo $issue['Issue']['description']?></dd>
+
+        <dt>URL</dt>
+        <dd><?php echo ($issue['Issue']['url']) ? $this->Html->link($issue['Issue']['url'], $issue['Issue']['url'], array('rel' => 'nofollow')) : 'None';?>
+
+        <dt>Status</dt>
+        <dd><?php echo $issue['Issue']['status']?></dd>
+
+        <dt>Priority</dt>
+        <dd><?php echo $issue['Issue']['priority']?></dd>
+
+        <dt>Created</dt>
+        <dd><?php echo $this->Time->nice($issue['Issue']['created'])?></dd>
+
+        <dt>Last Modified</dt>
+        <dd><?php echo $this->Time->nice($issue['Issue']['modified'])?></dd>
+      </dl>
+    </p>
+
+    <h3>Comments</h3>
+
+    <table class="zebra-striped">
+      <tbody>
+        <?php foreach ($issue['Comment'] as $comment):?>
+        <tr id="comment-<?php echo $comment['id']?>" name="comment-<?php echo $comment['id']?>">
+          <td>
+            <p style="font-size: .8em; float: right; padding: 0 0 .5em .5em; margin: -1em -.5em 0 0;">Posted <?php echo $this->Time->timeAgoInWords($comment['created'])?> by <?php echo $comment['User']['username']?></p>
+            <?php echo $comment['comment']?>
+          </td>
+        </tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+
+    <?php if (!empty($user)):?>
+    <h3 id="add_comment" name="add_comment">Add Comment</h3>
+
+    <?php echo $this->Form->create('Comment', array('action' => 'add', 'class' => 'form-stacked'))?>
+    <fieldset>
+    <?php
+      echo $this->Form->input('issue_id', array('value' => $issue['Issue']['id'], 'type' => 'hidden'));
+      echo $this->Form->input('comment', array('div' => array('class' => 'clearfix')));
+    ?>
+    </fieldset>
+    <div class="actions">
+      <?php echo $this->Form->button(__('Add Comment', true), array('class' => 'btn primary'))?>
+    </div>
+    <?php echo $this->Form->end();
+    endif;?>
+
   </div>
 </div>
