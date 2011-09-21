@@ -25,8 +25,8 @@
             <li><?php echo $this->Html->link('Projects', array('controller' => 'projects', 'action' => 'index'))?></li>
           </ul>
 
-          <form action="<?php echo $this->base?>/search" style="padding-left: 10em;">
-            <input type="q" placeholder="Search..." />
+          <form action="<?php echo $this->base?>/search" method="get" style="padding-left: 10em;">
+            <input type="text" id="q" name="q" placeholder="Search..." />
           </form>
 
           <ul class="nav secondary-nav">
