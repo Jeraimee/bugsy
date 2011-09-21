@@ -23,13 +23,10 @@
           <ul class="nav">
             <li><?php echo $this->Html->link('Add Issue', array('controller' => 'issues', 'action' => 'add'))?></li>
             <li><?php echo $this->Html->link('Projects', array('controller' => 'projects', 'action' => 'index'))?></li>
-            <li><a href="#grid-system">Grid</a></li>
-            <li><a href="#layouts">Layouts</a></li>
-            <li><a href="#typography">Typography</a></li>
           </ul>
 
-          <form action="">
-            <input type="text" placeholder="Search..." />
+          <form action="<?php echo $this->base?>/search" style="padding-left: 10em;">
+            <input type="q" placeholder="Search..." />
           </form>
 
           <ul class="nav secondary-nav">
