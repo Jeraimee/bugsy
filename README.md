@@ -10,6 +10,7 @@ Features
 * Uses [jQuery][jquery]
 * Ability to allow anonymous (public) posting of issues
 * Public/Private modes for entire projects
+* Commenting on issues
 
 Requirements
 ------------
