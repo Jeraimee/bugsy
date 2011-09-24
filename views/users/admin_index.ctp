@@ -48,8 +48,8 @@
             <span style="color: <?php echo ($user['User']['confirmed']) ? 'green;">Yes' : 'red;">No';?></span><!-- " -->
           </td>
           <td>
-            <button class="btn primary" onclick="window.location.href='/issues/edit/<?php echo $user['User']['id']?>';">Edit</button>
-            <button class="btn primary" onclick="window.location.href='/issues/view/<?php echo $user['User']['id']?>';">View</button>
+            <button class="btn primary" onclick="window.location.href='/admin/users/edit/<?php echo $user['User']['id']?>';">Edit</button>
+            <button class="btn primary" onclick="window.location.href='/admin/users/view/<?php echo $user['User']['id']?>';">View</button>
           </td>
         </tr>
         <?php endforeach;?>

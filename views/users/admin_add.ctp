@@ -1,24 +1,22 @@
-<div class="users form">
-<?php echo $this->Form->create('User');?>
-	<fieldset>
-		<legend><?php __('Admin Add User'); ?></legend>
-	<?php
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('email_address');
-		echo $this->Form->input('confirmed');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Users', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Bugs', true), array('controller' => 'bugs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Bug', true), array('controller' => 'bugs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Comments', true), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Comment', true), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-	</ul>
+<?php $this->pageTitle = 'Create Account'?>
+<div class="row">
+  <div class="span4 columns">
+    <h3>Creating Account</h3>
+    <p>
+      Fields in <span style="color: red">red</span> are required.
+    </p>
+  </div>
+  <div class="span12 columns">
+    <?php echo $this->Form->create('User', array('class' => 'form-stacked'));?>
+      <fieldset>
+      <?php echo $this->Form->input('username', array('div' => array('class' => 'clearfix')));
+      echo $this->Form->input('password', array('div' => array('class' => 'clearfix')));
+      echo $this->Form->input('password_confirm', array('type' => 'password', 'div' => array('class' => 'clearfix required')));
+      echo $this->Form->input('email_address', array('div' => array('class' => 'clearfix')))?>
+      </fieldset>
+      <div class="actions">
+        <?php echo $this->Form->button(__('Create Account', true), array('class' => 'btn primary'))?>
+      </div>
+      <?php echo $this->Form->end();?>
+  </div>
 </div>

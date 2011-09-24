@@ -1,26 +1,34 @@
-<div class="users form">
-<?php echo $this->Form->create('User');?>
-	<fieldset>
-		<legend><?php __('Admin Edit User'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('email_address');
-		echo $this->Form->input('confirmed');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
+<?php $this->pageTitle = "Editing {$user['User']['username']}"?>
+<div class="row">
+  <div class="span4 columns">
+    <h3>Editing A User</h3>
+    <p class="alert-message block-message error">
+      <strong>WARNING!</strong> Changing a users username or email address could render their account unusable. Please, edit users with care.
+    </p>
+    <ul>
+      <li><?php echo $this->Html->link('View', array('controller' => 'users', 'action' => 'view', $this->data['User']['id'], 'admin' => true))?>
+    </ul>
+    <ul>
+      <li><?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('User.id')), null, "Are you sure you want to delete user {$this->Form->value('User.id')}?"); ?></li>
+    </ul>
+    <p>
+      Fields in <span style="color: red">red</span> are required.
+    </p>
+  </div>
+  <div class="span12 columns">
 
-		<li><?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('User.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('User.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Users', true), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Bugs', true), array('controller' => 'bugs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Bug', true), array('controller' => 'bugs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Comments', true), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Comment', true), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-	</ul>
+  <?php echo $this->Form->create('User', array('class' => 'form-stacked'));?>
+  <fieldset>
+  <?php
+    echo $this->Form->input('id');
+    echo $this->Form->input('username', array('div' => array('class' => 'clearfix')));
+    echo $this->Form->input('email_address', array('div' => array('class' => 'clearfix')));
+    echo $this->Form->input('confirmed', array('div' => array('class' => 'clearfix')));
+  ?>
+  </fieldset>
+  <div class="actions">
+    <?php echo $this->Form->button(__('Save User', true), array('class' => 'btn primary'))?>
+  </div>
+  <?php echo $this->Form->end();?>
+  </div>
 </div>

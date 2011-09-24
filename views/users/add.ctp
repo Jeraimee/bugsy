@@ -21,6 +21,5 @@
         <?php echo $this->Form->button(__('Create Account', true), array('class' => 'btn primary'))?>
       </div>
       <?php echo $this->Form->end();?>
-    </div>
   </div>
 </div>
