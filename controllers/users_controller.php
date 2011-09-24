@@ -24,20 +24,17 @@ class UsersController extends AppController {
   }
 
 
-  function index()
+  public function my()
   {
-    $this->User->recursive = 0;
-    $this->set('users', $this->paginate());
-  }
-
-
-  function view($id = null)
-  {
-    if (!$id) {
-      $this->Session->setFlash(__('Invalid user', true));
-      $this->redirect(array('action' => 'index'));
+    if (empty($this->user)) {
+      $this->setError(__('Invalid user', true));
+      $this->redirect($this->referer());
     }
-    $this->set('user', $this->User->read(null, $id));
+
+    $this->User->contain(array('Issue' => array('Project'), 'Comment'));
+    $params = array('conditions' => array('id' => $this->user['User']['id']));
+    $user = $this->User->find('first', $params);
+    $this->set(compact('user'));
   }
 
 
