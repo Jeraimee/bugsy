@@ -55,6 +55,7 @@
           <td>
             <button class="btn primary" onclick="window.location.href='/issues/view/<?php echo $issue['Issue']['id']?>';">View</button>
             <button class="btn primary" onclick="window.location.href='/issues/edit/<?php echo $issue['Issue']['id']?>';">Edit</button>
+            <button class="btn danger" onclick="goOnConfirm('/admin/issues/delete/<?php echo $issue['Issue']['id']?>', 'Are you sure you want to delete issue <?php echo $issue['Issue']['id']?>?');">Delete</button>
           </td>
         </tr>
       <?php endforeach;?>

@@ -99,4 +99,19 @@ class IssuesController extends AppController {
     $this->set('issues', $this->paginate());
   }
 
+
+  function admin_delete($id = null)
+  {
+    if (!$id) {
+      $this->setError(__('Invalid issue', true));
+      $this->redirect($this->referer());
+    }
+    if ($this->Issue->delete($id)) {
+      $this->setSuccess(__('Issue deleted', true));
+      $this->redirect(array('controller' => 'issues', 'action' => 'index', 'admin' => true));
+    }
+    $this->setError(__('Issue was not deleted', true));
+    $this->redirect($this->referer());
+  }
+
 }
