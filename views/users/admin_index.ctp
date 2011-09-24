@@ -1,61 +1,60 @@
-<div class="users index">
-	<h2><?php __('Users');?></h2>
-	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
-			<th><?php echo $this->Paginator->sort('created');?></th>
-			<th><?php echo $this->Paginator->sort('modified');?></th>
-			<th><?php echo $this->Paginator->sort('username');?></th>
-			<th><?php echo $this->Paginator->sort('password');?></th>
-			<th><?php echo $this->Paginator->sort('email_address');?></th>
-			<th><?php echo $this->Paginator->sort('confirmed');?></th>
-			<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-	$i = 0;
-	foreach ($users as $user):
-		$class = null;
-		if ($i++ % 2 == 0) {
-			$class = ' class="altrow"';
-		}
-	?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $user['User']['id']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['created']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['modified']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['username']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['password']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['email_address']; ?>&nbsp;</td>
-		<td><?php echo $user['User']['confirmed']; ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $user['User']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $user['User']['id'])); ?>
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $user['User']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-	));
-	?>	</p>
+<?php $this->pageTitle = 'Users'?>
+<div class="row">
+  <div class="span4 columns">
+    <h3>Users</h3>
 
-	<div class="paging">
-		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
-	 | 	<?php echo $this->Paginator->numbers();?>
- |
-		<?php echo $this->Paginator->next(__('next', true) . ' >>', array(), null, array('class' => 'disabled'));?>
-	</div>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New User', true), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Bugs', true), array('controller' => 'bugs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Bug', true), array('controller' => 'bugs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Comments', true), array('controller' => 'comments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Comment', true), array('controller' => 'comments', 'action' => 'add')); ?> </li>
-	</ul>
+    <dl>
+      <dt>Number of Users</dt>
+      <dd><?php echo number_format($stats['number_of_users'])?></dd>
+      <dt>Confirmed Users</dt>
+      <dd><?php echo number_format($stats['number_of_confirmed_users'])?></dd>
+      <dt>Issues Per User</dt>
+      <dd><?php echo number_format($stats['avg_issues_per_user'])?></dd>
+    </dl>
+
+    <ul>
+      <li><?php echo $this->Html->link('Add User', array('controller' => 'users', 'action' => 'add'))?></li>
+    </ul>
+  </div>
+  <div class="span12 columns">
+
+    <table class="zebra-striped">
+      <thead>
+        <tr>
+          <th>
+            Username
+          </th>
+          <th>
+            Email Address
+          </th>
+          <th>
+            Confirmed?
+          </th>
+          <th>
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($users as $user):?>
+        <tr>
+          <td>
+            <?php echo $user['User']['username']?>
+          </td>
+          <td>
+            <?php echo $this->Html->link($user['User']['email_address'], "mailto:{$user['User']['email_address']}")?>
+          </td>
+          <td>
+            <span style="color: <?php echo ($user['User']['confirmed']) ? 'green;">Yes' : 'red;">No';?></span><!-- " -->
+          </td>
+          <td>
+            <button class="btn primary" onclick="window.location.href='/issues/edit/<?php echo $user['User']['id']?>';">Edit</button>
+            <button class="btn primary" onclick="window.location.href='/issues/view/<?php echo $user['User']['id']?>';">View</button>
+          </td>
+        </tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+
+  </div>
 </div>

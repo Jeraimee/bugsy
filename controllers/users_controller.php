@@ -91,7 +91,23 @@ class UsersController extends AppController {
 
   function admin_index()
   {
-    $this->User->recursive = 0;
+    $stats = array();
+
+    $this->User->contain();
+    $stats['number_of_users'] = $this->User->find('count');
+
+    $this->User->contain();
+    $params = array('conditions' => array('confirmed' => 1));
+    $stats['number_of_confirmed_users'] = $this->User->find('count', $params);
+
+    $this->User->Issue->contain();
+    $number_of_issues = $this->User->Issue->find('count');
+
+    $stats['avg_issues_per_user'] = (floor($number_of_issues/$stats['number_of_users']));
+
+    $this->set(compact('stats'));
+
+    $this->User->contain();
     $this->set('users', $this->paginate());
   }
 
