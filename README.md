@@ -24,6 +24,7 @@ Installation
 
 * Modify <code>webroot/index.php</code> to point to your CakePHP
 * Modify <code>config/database.php</code> to have your DB user/password/host/dbname
+* While in <code>/path/to/bugsy</code> run <code>git submodule init;git submodule update</code> to load the submodules
 * While in <code>/path/to/bugsy</code> run <code>cake migration all</code> to build the DB and add the admin user (username: admin, password: password)
 
 License
