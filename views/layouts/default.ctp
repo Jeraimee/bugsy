@@ -7,8 +7,8 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <?php echo $this->Html->css(array('bootstrap-1.2.0.min.css', 'bugsy.css'));
-    echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/prototype/1.7.0.0/prototype.js');
-    echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js');
+    echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js');
+    echo $this->Html->script(array('bootstrap-dropdown', 'bootstrap-alerts'));
     echo $scripts_for_layout;
     echo $this->Html->meta('icon')?>
   </head>
@@ -36,7 +36,7 @@
             <li><?php echo $this->Html->link('Login', array('controller' => 'users', 'action' => 'login', 'admin' => false))?></li>
             <?php else:?>
               <?php if ($user['User']['id'] == 1):?>
-              <li class="dropdown">
+              <li class="dropdown" data-dropdown="dropdown">
                 <?php echo $this->Html->link('Admin', '#', array('class' => 'dropdown-toggle'))?>
                 <ul class="dropdown-menu">
                   <li><?php echo $this->Html->link('Issues', array('controller' => 'issues', 'action' => 'index', 'admin' => true))?></li>
@@ -66,6 +66,5 @@
       </footer>
 
     </div>
-    <?php echo $this->Html->script('global')?>
   </body>
 </html>
