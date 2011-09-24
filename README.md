@@ -5,7 +5,11 @@ Bugsy is a [CakePHP][cakephp] application for simple issue (bug) tracking. When 
 Features
 --------
 
-* Features will go here
+* HTML5
+* Uses [Bootstrap][bootstrap] by Twitter
+* Uses [jQuery][jquery]
+* Ability to allow anonymous (public) posting of issues
+* Public/Private modes for entire projects
 
 Requirements
 ------------
@@ -23,3 +27,5 @@ Bugsy is © 2011 Jeraimee Hughes, licensed under the Creative Commons Attributio
 [mantis]: http://www.mantisbt.org/
 [php]: http://php.net/
 [mysql]: http://mysql.com/
+[bootstrap]: http://twitter.github.com/bootstrap/
+[jquery]: http://jquery.com/
