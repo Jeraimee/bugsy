@@ -27,7 +27,7 @@ class UsersController extends AppController {
   public function my()
   {
     if (empty($this->user)) {
-      $this->setError(__('Invalid user', true));
+      $this->setError('Invalid user ID');
       $this->redirect($this->referer());
     }
 
@@ -41,48 +41,26 @@ class UsersController extends AppController {
   function add()
   {
     if ($this->Auth->user()) {
-      $this->redirect('/');
+      $this->redirect($this->referer());
     }
     if (!empty($this->data)) {
       $this->User->create();
 
       if ($this->data['User']['password'] == $this->Auth->password($this->data['User']['password_confirm'])) {
         if ($this->User->save($this->data)) {
-          $this->setSuccess(__('Your account has been added. You may now login.', true));
+          $this->setSuccess('Your account has been added. You may now login.');
           $this->redirect(array('controller' => 'users', 'action' => 'login'));
-          return;
         }
         else {
-          $this->setError(__('The user could not be saved. Please, try again.', true));
+          $this->setError('The user could not be saved. Please, try again.');
         }
       }
       else {
-        $this->setError(__('Your passwords did not match. Please, try again.', true));
+        $this->setError('Your passwords did not match. Please, try again.');
       }
     }
     unset($this->data['User']['password']);
     unset($this->data['User']['password_confirm']);
-  }
-
-
-  function edit($id = null)
-  {
-    if (!$id && empty($this->data)) {
-      $this->Session->setFlash(__('Invalid user', true));
-      $this->redirect(array('action' => 'index'));
-    }
-    if (!empty($this->data)) {
-      if ($this->User->save($this->data)) {
-        $this->Session->setFlash(__('The user has been saved', true));
-        $this->redirect(array('action' => 'index'));
-      }
-      else {
-        $this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
-      }
-    }
-    if (empty($this->data)) {
-      $this->data = $this->User->read(null, $id);
-    }
   }
 
 
@@ -112,7 +90,7 @@ class UsersController extends AppController {
   function admin_view($id = null)
   {
     if (!$id) {
-      $this->setError(__('Invalid user', true));
+      $this->setError('Invalid user ID');
       $this->redirect($this->referer());
     }
     $this->User->contain(array('Issue', 'Comment' => array('Issue')));
@@ -125,11 +103,11 @@ class UsersController extends AppController {
     if (!empty($this->data)) {
       $this->User->create();
       if ($this->User->save($this->data)) {
-        $this->Session->setFlash(__('The user has been saved', true));
-        $this->redirect(array('action' => 'index'));
+        $this->setSuccess('The user has been saved');
+        $this->redirect(array('action' => 'view', $this->User->getLastInsertID()));
       }
       else {
-        $this->Session->setFlash(__('The user could not be saved. Please, try again.', true));
+        $this->setError('The user could not be saved. Please, try again.');
       }
     }
   }
