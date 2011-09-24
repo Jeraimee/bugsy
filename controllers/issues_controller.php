@@ -11,8 +11,12 @@ class IssuesController extends AppController {
 
   function index()
   {
-    $this->Issue->recursive = 0;
-    $this->set('Issues', $this->paginate());
+    if (empty($this->user)) {
+      $this->paginate['conditions']['Project.public_add'] = true;
+    }
+
+    $this->Issue->contain(array('Project'));
+    $this->set('issues', $this->paginate());
   }
 
 
@@ -91,7 +95,7 @@ class IssuesController extends AppController {
 
   function admin_index()
   {
-    $this->Issue->recursive = 0;
+    $this->Issue->contain();
     $this->set('issues', $this->paginate());
   }
 

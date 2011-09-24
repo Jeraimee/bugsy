@@ -3,9 +3,11 @@
   <div class="span4 columns">
     <h3>Issues</h3>
     <p>
-    	<?php echo $this->Paginator->counter(array('format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-    	))?>
+    	<?php echo $this->Paginator->counter(array('format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)))?>
     </p>
+    <ul>
+      <li><?php echo $this->Html->link('Add Issue', array('controller' => 'issues', 'action' => 'add', 'admin' => false))?></li>
+    </ul>
   </div>
   <div class="span12 columns">
 
@@ -13,7 +15,10 @@
       <thead>
         <tr>
           <th>
-            <?php echo $this->Paginator->sort('created')?>
+            <?php echo $this->Paginator->sort('id')?>
+          </th>
+          <th>
+            <?php echo $this->Paginator->sort('Project', 'Project.name')?>
           </th>
           <th>
             <?php echo $this->Paginator->sort('subject')?>
@@ -33,7 +38,10 @@
       <?php foreach ($issues as $issue):?>
         <tr>
           <td>
-            <?php echo $this->Time->niceShort($issue['Issue']['created'])?>
+            <?php echo $issue['Issue']['id']?>
+          </td>
+          <td>
+            <?php echo $issue['Project']['name']?>
           </td>
           <td>
             <?php echo $issue['Issue']['subject']?>
@@ -46,6 +54,7 @@
           </td>
           <td>
             <button class="btn primary" onclick="window.location.href='/issues/view/<?php echo $issue['Issue']['id']?>';">View</button>
+            <button class="btn primary" onclick="window.location.href='/issues/edit/<?php echo $issue['Issue']['id']?>';">Edit</button>
           </td>
         </tr>
       <?php endforeach;?>

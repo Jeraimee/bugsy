@@ -23,6 +23,7 @@
           <ul class="nav">
             <li><?php echo $this->Html->link('Add Issue', array('controller' => 'issues', 'action' => 'add'))?></li>
             <li><?php echo $this->Html->link('Projects', array('controller' => 'projects', 'action' => 'index'))?></li>
+            <li><?php echo $this->Html->link('Issues', array('controller' => 'issues', 'action' => 'index'))?></li>
           </ul>
 
           <form action="<?php echo $this->base?>/search" method="get" style="padding-left: 10em;">
