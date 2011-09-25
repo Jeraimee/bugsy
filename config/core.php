@@ -312,3 +312,6 @@
  *
  */
   Cache::config('default', array('engine' => 'File'));
+
+  // Load the Bugy configuration
+  require_once 'bugsy.php';

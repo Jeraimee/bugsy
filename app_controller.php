@@ -43,6 +43,7 @@ class AppController extends Controller {
   {
     $this->user = $this->Auth->user();
     $this->set('user', $this->user);
+    $this->set('config', Configure::read('Bugsy'));
   }
 
 
