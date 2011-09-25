@@ -112,6 +112,17 @@ class PagesController extends AppController {
       $this->Project->Issue->Comment->contain(array('Issue'));
       $comments = $this->Project->Issue->Comment->find('all', $params);
 
+      if (!$stats = Cache::read('stats')) {
+        $stats = array();
+
+        $this->Project->Issue->contain();
+        $stats['num_issues'] = $this->Project->Issue->find('count');
+        $this->Project->contain();
+        $stats['num_projects'] = $this->Project->find('count');
+
+        Cache::write('stats', $stats);
+      }
+      $this->set('stats', $stats);
     }
 
     $this->set(compact('page', 'subpage', 'title_for_layout', 'projects', 'issues', 'comments'));
