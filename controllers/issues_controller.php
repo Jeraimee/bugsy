@@ -89,8 +89,12 @@ class IssuesController extends AppController {
     if (empty($this->data)) {
       $this->data = $this->Issue->read(null, $id);
     }
+
+    $priorities = Configure::read('Defaults.priorities');
+    $statuses   = Configure::read('Defaults.statuses');
+
     $projects = $this->Issue->Project->find('list');
-    $this->set(compact('projects'));
+    $this->set(compact('projects', 'priorities', 'statuses'));
   }
 
 

@@ -17,19 +17,19 @@
       <thead>
         <tr>
           <th>
-            ID
+            <?php echo $this->Paginator->sort('ID', 'id')?>
           </th>
           <th>
-            Project
+            <?php echo $this->Paginator->sort('Project', 'Project.name')?>
           </th>
           <th>
-            Subject
+            <?php echo $this->Paginator->sort('Subject')?>
           </th>
           <th>
-            Status
+            <?php echo $this->Paginator->sort('Status')?>
           </th>
           <th>
-            Priority
+            <?php echo $this->Paginator->sort('Priority')?>
           </th>
           <th>
             Actions

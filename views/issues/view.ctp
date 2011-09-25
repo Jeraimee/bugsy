@@ -23,7 +23,7 @@
         <dd><?php echo $issue['Issue']['subject']?></dd>
 
         <dt>Description</dt>
-        <dd><?php echo $issue['Issue']['description']?></dd>
+        <dd><?php echo nl2br($issue['Issue']['description'])?></dd>
 
         <dt>URL</dt>
         <dd><?php echo ($issue['Issue']['url']) ? $this->Html->link($issue['Issue']['url'], $issue['Issue']['url'], array('rel' => 'nofollow')) : 'None';?>
