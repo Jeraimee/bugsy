@@ -6,7 +6,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <?php echo $this->Html->css(array('bootstrap-1.2.0.min.css', 'bugsy.css'));
+    <?php echo $this->Html->css(array('http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css', 'bugsy.css'));
     echo $this->Html->script('https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js');
     echo $this->Html->script(array('bootstrap-dropdown', 'bootstrap-alerts'));
     echo $scripts_for_layout;
