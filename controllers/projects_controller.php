@@ -26,7 +26,18 @@ class ProjectsController extends AppController {
       $this->setError('Invalid project id.');
       $this->redirect(array('action' => 'index'));
     }
-    $this->set('project', $this->Project->read(null, $id));
+
+    $params = array('conditions' => array('Project.id' => $id));
+    if (empty($this->user)) {
+      $params['conditions']['Project.public_view'] = true;
+    }
+
+    if (!$project = $this->Project->find('first', $params)) {
+      $this->setError('Sorry. You are unable to view the requested project or the project was not found.');
+      $this->redirect($this->referer());
+    }
+
+    $this->set(compact('project'));
   }
 
 
