@@ -43,6 +43,19 @@ class AppController extends Controller {
   {
     $this->user = $this->Auth->user();
     $this->set('user', $this->user);
+
+    if (isset($this->params['admin'])) {
+
+      if (empty($this->user) or ($this->user['User']['id'] != 1)) {
+
+        $this->setError('You are not authorized for that action.');
+        $this->redirect($this->referer());
+
+      }
+
+    }
+
+    $this->set('config', Configure::read('Bugsy'));
   }
 
 

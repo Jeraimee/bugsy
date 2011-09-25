@@ -9,7 +9,8 @@ class ProjectsController extends AppController {
     $this->Auth->allow(array('index', 'view'));
   }
 
-  function index()
+
+  public function index()
   {
     if (empty($this->user)) {
       $this->paginate = array('conditions' => array('Project.public_view' => true));
@@ -22,7 +23,7 @@ class ProjectsController extends AppController {
   function view($id = null)
   {
     if (!$id) {
-      $this->setError(__('Invalid project', true));
+      $this->setError('Invalid project id.');
       $this->redirect(array('action' => 'index'));
     }
     $this->set('project', $this->Project->read(null, $id));
@@ -34,11 +35,11 @@ class ProjectsController extends AppController {
     if (!empty($this->data)) {
       $this->Project->create();
       if ($this->Project->save($this->data)) {
-        $this->setSuccess(__('The project has been saved', true));
+        $this->setSuccess("{$this->data['Project']['name']} has been added.");
         $this->redirect(array('action' => 'view', $this->Project->getLastInsertID()));
       }
       else {
-        $this->setError(__('The project could not be saved. Please, try again.', true));
+        $this->setError('The project could not be added. Please, try again.');
       }
     }
   }
@@ -47,16 +48,16 @@ class ProjectsController extends AppController {
   function edit($id = null)
   {
     if (!$id && empty($this->data)) {
-      $this->setError(__('Invalid project', true));
+      $this->setError('Invalid project id');
       $this->redirect(array('action' => 'index'));
     }
     if (!empty($this->data)) {
       if ($this->Project->save($this->data)) {
-        $this->setSuccess(__('The project has been saved', true));
+        $this->setSuccess("{$this->data['Project']['name']} was updated.");
         $this->redirect(array('action' => 'view', $this->data['Project']['id']));
       }
       else {
-        $this->setError(__('The project could not be saved. Please, try again.', true));
+        $this->setError("{$this->data['Project']['name']} could not be saved. Please, try again.");
       }
     }
     if (empty($this->data)) {
@@ -75,8 +76,8 @@ class ProjectsController extends AppController {
   function admin_view($id = null)
   {
     if (!$id) {
-      $this->Session->setFlash(__('Invalid project', true));
-      $this->redirect(array('action' => 'index'));
+      $this->setError('Invalid project ID');
+      $this->redirect($this->referer());
     }
     $this->set('project', $this->Project->read(null, $id));
   }
@@ -87,11 +88,11 @@ class ProjectsController extends AppController {
     if (!empty($this->data)) {
       $this->Project->create();
       if ($this->Project->save($this->data)) {
-        $this->setSuccess(__('The project has been saved', true));
-        $this->redirect(array('action' => 'index'));
+        $this->setSuccess("{$this->data['Project']['name']} has been added.");
+        $this->redirect(array('action' => 'index', $this->Project->getLastInsertID()));
       }
       else {
-        $this->setError(__('The project could not be saved. Please, try again.', true));
+        $this->setError('The project could not be saved. Please, try again.');
       }
     }
   }
@@ -100,16 +101,16 @@ class ProjectsController extends AppController {
   function admin_edit($id = null)
   {
     if (!$id && empty($this->data)) {
-      $this->setSuccess(__('Invalid project', true));
-      $this->redirect(array('action' => 'index'));
+      $this->setSuccess('Invalid project ID');
+      $this->redirect($this->referer());
     }
     if (!empty($this->data)) {
       if ($this->Project->save($this->data)) {
-        $this->setSuccess(__('The project has been saved', true));
-        $this->redirect(array('action' => 'index'));
+        $this->setSuccess("{$this->data['Project']['name']} has been saved.");
+        $this->redirect(array('action' => 'view', $this->data['Project']['id']));
       }
       else {
-        $this->setError(__('The project could not be saved. Please, try again.', true));
+        $this->setError('The project could not be saved. Please, try again.');
       }
     }
     if (empty($this->data)) {
@@ -121,15 +122,15 @@ class ProjectsController extends AppController {
   function admin_delete($id = null)
   {
     if (!$id) {
-      $this->Session->setFlash(__('Invalid id for project', true));
-      $this->redirect(array('action'=>'index'));
+      $this->setError('Invalid project ID');
+      $this->redirect($ths->referer());
     }
     if ($this->Project->delete($id)) {
-      $this->Session->setFlash(__('Project deleted', true));
+      $this->setSuccess('Project deleted.');
       $this->redirect(array('action'=>'index'));
     }
-    $this->Session->setFlash(__('Project was not deleted', true));
-    $this->redirect(array('action' => 'index'));
+    $this->setError('There was an error deleting the project. Please, try again.');
+    $this->redirect($this->referer());
   }
 
 }

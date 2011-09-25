@@ -23,8 +23,8 @@ class IssuesController extends AppController {
   function view($id = null)
   {
     if (!$id) {
-      $this->Session->setFlash(__('Invalid Issue', true));
-      $this->redirect(array('action' => 'index'));
+      $this->setError('Invalid issue ID');
+      $this->redirect($this->referer());
     }
     $this->Issue->contain(array('Project', 'Comment' => array('User')));
     $this->set('issue', $this->Issue->read(null, $id));
@@ -42,11 +42,14 @@ class IssuesController extends AppController {
 
       $this->Issue->create();
       if ($this->Issue->save($this->data)) {
-        $this->setSuccess(__('The Issue has been saved', true));
-        $this->redirect(array('action' => 'view', $this->Issue->getLastInsertID()));
+
+        $issue_id = $this->Issue->getLastInsertID();
+
+        $this->setSuccess("Issue {$issue_id} has been added.");
+        $this->redirect(array('action' => 'view', $issue_id));
       }
       else {
-        $this->setError(__('The Issue could not be saved. Please, try again.', true));
+        $this->setError('Your issue could not be saved. Please, try again.');
       }
     }
 
@@ -57,14 +60,13 @@ class IssuesController extends AppController {
     $projects = $this->Issue->Project->find('list', $params);
 
     if (empty($projects)) {
-      $this->setError(__('No projects are currently available.', true));
-      $this->redirect('/');
+      $this->setError('No projects are currently available.');
+      $this->redirect($this->referer());
     }
 
-    $users = $this->Issue->User->find('list');
     $priorities = Configure::read('Defaults.priorities');
 
-    $this->set(compact('projects', 'users', 'priorities', 'project_id'));
+    $this->set(compact('projects', 'priorities', 'project_id'));
 
   }
 
@@ -72,30 +74,33 @@ class IssuesController extends AppController {
   function edit($id = null)
   {
     if (!$id && empty($this->data)) {
-      $this->Session->setFlash(__('Invalid Issue', true));
-      $this->redirect(array('action' => 'index'));
+      $this->setError('Invalid issue ID');
+      $this->redirect($this->referer());
     }
     if (!empty($this->data)) {
       if ($this->Issue->save($this->data)) {
-        $this->Session->setFlash(__('The Issue has been saved', true));
-        $this->redirect(array('action' => 'index'));
+        $this->setSuccess("Issue {$this->data['Issue']['id']} has been updated.");
+        $this->redirect(array('action' => 'view', $this->data['Issue']['id']));
       }
       else {
-        $this->Session->setFlash(__('The Issue could not be saved. Please, try again.', true));
+        $this->setError('The Issue could not be saved. Please, try again.');
       }
     }
     if (empty($this->data)) {
       $this->data = $this->Issue->read(null, $id);
     }
+
+    $priorities = Configure::read('Defaults.priorities');
+    $statuses   = Configure::read('Defaults.statuses');
+
     $projects = $this->Issue->Project->find('list');
-    $users = $this->Issue->User->find('list');
-    $this->set(compact('projects', 'users'));
+    $this->set(compact('projects', 'priorities', 'statuses'));
   }
 
 
   function admin_index()
   {
-    $this->Issue->contain();
+    $this->Issue->recurisve = 0;
     $this->set('issues', $this->paginate());
   }
 
@@ -103,14 +108,14 @@ class IssuesController extends AppController {
   function admin_delete($id = null)
   {
     if (!$id) {
-      $this->setError(__('Invalid issue', true));
+      $this->setError('Invalid issue ID');
       $this->redirect($this->referer());
     }
     if ($this->Issue->delete($id)) {
-      $this->setSuccess(__('Issue deleted', true));
-      $this->redirect(array('controller' => 'issues', 'action' => 'index', 'admin' => true));
+      $this->setSuccess('Issue deleted.');
+      $this->redirect(array('action' => 'index'));
     }
-    $this->setError(__('Issue was not deleted', true));
+    $this->setError('There was an error deleting the issue. Please, try again.');
     $this->redirect($this->referer());
   }
 

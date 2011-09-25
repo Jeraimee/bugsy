@@ -40,3 +40,6 @@
   </div>
 
 </div>
+<div class="row">
+  <p style="text-align: center;">Currently managing <?php echo number_format($stats['num_issues'])?> issues across <?php echo number_format($stats['num_projects'])?> projects.</p>
+</div>

@@ -30,16 +30,16 @@
   </div>
 </div>
 <script type="text/javascript">
-document.observe('dom:loaded', function() {
-  $('ProjectPublicAdd').observe('click', function(e) {
-    if (Event.element(e).checked == true) {
-      $('ProjectPublicView').checked = true;
+$(document).ready(function() {
+
+  $('#ProjectPublicAdd').bind('click', function() {
+    if ($(this).is(':checked')) {
+      $('#ProjectPublicView').attr('checked', 'checked');
     }
   });
-  $('ProjectPublicView').observe('click', function(e) {
-    if (Event.element(e).checked == false) {
-      $('ProjectPublicAdd').checked = false;
-    }
+
+  $('#ProjectPublicView').bind('click', function() {
+    $('#ProjectPublicAdd').attr('checked', false);
   });
 });
 </script>
