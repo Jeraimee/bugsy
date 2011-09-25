@@ -223,7 +223,8 @@
  * Set to `true` to apply timestamps, when debug = 0, or set to 'force' to always enable
  * timestamping.
  */
-  //Configure::write('Asset.timestamp', true);
+  Configure::write('Asset.timestamp', true);
+
 /**
  * Compress CSS output by removing comments, whitespace, repeating tags, etc.
  * This requires a/var/cache directory to be writable by the web server for caching.
@@ -311,7 +312,17 @@
  *  ));
  *
  */
-  Cache::config('default', array('engine' => 'File'));
+
+  if (extension_loaded('apc')) {
+    // We'll prefer APC over file cache (gag)
+    Cache::config('default', array('engine'      => 'Apc',
+                                   'duration'    => 3600,
+                                   'probability' => 100,
+                                   'prefix'      => Inflector::slug(APP_DIR) . '_'));
+  }
+  else {
+    Cache::config('default', array('engine' => 'File'));
+  }
 
   // Load the Bugy configuration
   require_once 'bugsy.php';
