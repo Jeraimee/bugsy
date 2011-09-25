@@ -70,5 +70,13 @@
       </footer>
 
     </div>
+    <script type="text/javascript">
+      var goOnConfirm = function(url, message) {
+        if (confirm(message)) {
+          window.location.href = url;
+          return false;
+        }
+      }
+    </script>
   </body>
 </html>
